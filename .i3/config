@@ -4,15 +4,15 @@
 # Mod4 = win (used when certain bindings conflict with emacs/tcsh)
 
 # font for window titles. ISO 10646 = Unicode
-#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-font -*-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-15
+font -misc-fixed-*-*-*-*-10-100-75-75-c-60-iso10646-1
+#font -*-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-15
 
 # use Mouse+Mod1 to drag floating windows to their wanted position
 floating_modifier Mod1
 
 # start a terminal
 bindsym Mod1+Return exec /usr/local/bin/aterm
-bindsym F2 exec /usr/local/bin/urxvt
+bindsym F2 exec /home/jasper/bin/term.sh
 
 # kill focused window
 bindsym Mod1+Shift+q kill
@@ -141,10 +141,21 @@ mode "resize" {
 
 bindsym Mod1+r mode "resize"
 
-# Start i3bar to display a workspace bar
+# desktop (bar + i3status + tray on left monitor, and regular bar on the right)
 bar {
-#        status_command /home/jasper/hack/i3status/i3status
         status_command /usr/local/bin/i3status
+	output DVI-1
+}
+bar {
+	output DVI-0
+	tray_output none
+}
+
+# laptop
+bar {
+        status_command /usr/local/bin/i3status
+	output LVDS
+
 }
 
 # class                 border  backgr. text
@@ -153,8 +164,14 @@ client.focused_inactive #333333 #5f676a #ffffff
 client.unfocused        #333333 #222222 #888888
 client.urgent           #2f343a #900000 #ffffff
 
-# orig
-#client.focused          #4c7899 #285577 #ffffff
-#client.focused_inactive #333333 #5f676a #ffffff
-#client.unfocused        #333333 #222222 #888888
-#client.urgent           #2f343a #900000 #ffffff
+# Move these windows to preset workspaces -- xprop(1) -- WM_CLASS[1]
+assign [class="Chrome"] 3
+assign [class="Pidgin"] 6
+assign [class="Gmpc"] 9
+
+# Unknown outputs just get ignored, so this just affects dual-head desktop
+workspace 1 output DVI-0
+workspace 3 output DVI-0
+workspace 6 output DVI-0
+workspace 8 output DVI-0
+workspace 9 output DVI-0
