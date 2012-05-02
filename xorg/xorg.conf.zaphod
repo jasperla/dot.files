@@ -1,0 +1,85 @@
+Section "Device"
+        Identifier      "Radeon HD 2600 Pro 0"
+        Driver          "radeon"
+        VendorName      "ATI Technologies Inc"
+        BoardName       "Radeon HD 2600 Pro"
+        BusID           "PCI:1:0:0"
+ 	Option     	"ZaphodHeads" "DVI-0"
+ 	Option     	"DVI-0" "Monitor0"
+	Screen		0
+EndSection
+
+Section "Device"
+        Identifier      "Radeon HD 2600 Pro 1"
+        Driver          "radeon"
+        VendorName      "ATI Technologies Inc"
+        BoardName       "Radeon HD 2600 Pro"
+        BusID           "PCI:1:0:0"
+ 	Option     	"ZaphodHeads" "DVI-1"
+ 	Option     	"DVI-1" "Monitor1"
+	Screen		1
+EndSection
+
+Section "Screen"
+        Identifier      "Screen0"
+        Device          "Radeon HD 2600 Pro 0"
+	Monitor		"Monitor0"
+        DefaultDepth    24
+EndSection
+
+Section "Screen"
+        Identifier      "Screen1"
+        Device          "Radeon HD 2600 Pro 1"
+	Monitor		"Monitor1"
+        DefaultDepth    24
+EndSection
+
+Section "Monitor"
+	Identifier   "Monitor0"
+	VendorName   "ACR"
+	ModelName    "Acer P203W"
+	HorizSync    31.0 - 83.0
+	VertRefresh  56.0 - 75.0
+	Option	    "DPMS"
+#	Option	    "ZaphodHeads" "DVI-0"
+	Modeline "1680x1050"  146.25  1680 1960 2136 2240  1050 1053 1059 1089 +hsync -vsync
+EndSection
+
+Section "Monitor"
+	Identifier   "Monitor1"
+	VendorName   "ACR"
+	ModelName    "Acer P203W"
+	HorizSync    31.0 - 83.0
+	VertRefresh  56.0 - 75.0
+	Option	    "DPMS"
+#	Option	    "ZaphodHeads" "DVI-1"
+	Modeline "1680x1050"  146.25  1680 1960 2136 2240  1050 1053 1059 1089 +hsync -vsync
+EndSection
+
+Section "InputDevice"
+	Identifier  "Keyboard0"
+	Driver      "kbd"
+EndSection
+
+Section "InputDevice"
+	Identifier  "Mouse0"
+	Driver      "mouse"
+	Option	    "Protocol" "auto"
+	Option	    "Device" "/dev/wsmouse"
+	Option	    "ZAxisMapping" "4 5 6 7"
+EndSection
+
+Section "ServerLayout"
+        Identifier     "X.org Configured"
+#        Screen      0  "Screen0" 0 0
+#        Screen      1  "Screen1" LeftOf "Screen0"
+        Screen        "Screen0" 0 0
+        Screen        "Screen1" RightOf "Screen0"
+	InputDevice    "Mouse0" "CorePointer"
+	InputDevice    "Keyboard0" "CoreKeyboard"
+	Option	"Xinerama" "off"
+EndSection
+
+Section "ServerFlags"
+        Option "UseSIGIO" "false"
+EndSection
